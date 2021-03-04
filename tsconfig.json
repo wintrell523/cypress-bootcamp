@@ -1,11 +1,9 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
-    "types": ["cypress", "node", "cypress-real-events"],
-    "baseUrl": "./"
-  },
-  "include": [
-    "**/*.ts"
-  ]
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["es5", "dom"],
+		"types": ["cypress", "node", "cypress-real-events", "cypress-file-upload"],
+		"baseUrl": "./"
+	},
+	"include": ["**/*.ts"]
 }

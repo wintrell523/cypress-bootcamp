@@ -1,16 +1,13 @@
 /// <reference types="cypress" />
 
+const addBoard = input => {
+	cy.get('[data-cy="create-board"]').click()
+
+	cy.get('[data-cy=new-board-input]').type(`${input}{enter}`)
+}
+
 it('typescript', () => {
+	cy.visit('/')
 
-  cy
-    .visit('/')
-
-  cy
-    .get('[data-cy="create-board"]')
-    .click();
-
-  cy
-    .get('[data-cy=new-board-input]')
-    .type('new board{enter}');
-
+	addBoard('hello world')
 })

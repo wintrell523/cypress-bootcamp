@@ -3,16 +3,14 @@ const path = require('path')
 const dbPath = path.resolve('./trelloapp/public/data/data.json')
 
 const empty = {
-  "boards": [],
-  "tasks": [],
-  "users": [],
-  "lists": []
+	boards: [],
+	tasks: [],
+	users: [],
+	lists: [],
 }
 
 module.exports.setupDb = (data = empty) => {
+	fs.writeFileSync(dbPath, JSON.stringify(data))
 
-  fs.writeFileSync(dbPath, JSON.stringify(data))
-
-  return data;
-
-};
+	return data
+}
