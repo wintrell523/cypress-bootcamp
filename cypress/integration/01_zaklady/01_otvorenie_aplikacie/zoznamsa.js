@@ -1,8 +1,7 @@
 /// <reference types="cypress" />
 
 it('otvorenie trello boardu', () => {
-
-  /*
+	/*
 
   úloha #1: vyskúšaj si otvorenie stránky pomocou príkazu .visit()
 
@@ -14,4 +13,11 @@ it('otvorenie trello boardu', () => {
 
   */
 
-});
+	// visits / of base URL (in cypress.json)
+	cy.visit('/')
+})
+
+it('open trello board', () => {
+	// opens base URL (set in cypress.json) with /board/<boardID> appended
+	cy.visit('/board/78682246982')
+})

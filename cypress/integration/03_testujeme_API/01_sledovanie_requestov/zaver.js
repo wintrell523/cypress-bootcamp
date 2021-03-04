@@ -1,71 +1,40 @@
 /// <reference types="cypress" />
 
-beforeEach( () => {
+beforeEach(() => {
+	cy.intercept('GET', '/api/boards').as('boardList')
 
-  cy
-    .intercept('GET', '/api/boards')
-    .as('boardList')
+	cy.intercept('GET', '/api/boards/*').as('board')
 
-  cy
-    .intercept('GET', '/api/boards/*')
-    .as('board')
+	cy.intercept('POST', '/api/boards').as('createBoard')
 
-  cy
-    .intercept('POST', '/api/boards')
-    .as('createBoard')
-
-  cy
-    .visit('/');
-
-});
-
-it('načítanie zoznamu boardov', () => {
-
-  cy
-    .wait('@boardList')
-
-  cy
-    .get('[data-cy=board-item]')
-    .should('have.length', 0)
-
+	cy.visit('/')
 })
 
-it('otvorenie boardu', () => {
+it('načítanie zoznamu boardov', () => {
+	cy.wait('@boardList')
 
-  cy
-    .get('[data-cy=board-item]')
-    .eq(0)
-    .click();
+	cy.get('[data-cy=board-item]').should('have.length', 0)
+})
 
-  cy
-    .wait('@board');
+it.only('otvorenie boardu', () => {
+	cy.get('[data-cy=board-item]').eq(0).click()
 
-});
+	cy.wait('@board')
+})
 
 it('vytvorenie nového boardu', () => {
+	cy.get('[data-cy=create-board]').click()
 
-  cy
-    .get('[data-cy=create-board]')
-    .click()
+	cy.get('[data-cy=new-board-input]').type('nova zahrada')
 
-  cy
-    .get('[data-cy=new-board-input]')
-    .type('nova zahrada')
+	cy.contains('Save').click()
 
-  cy
-    .contains('Save')
-    .click()
-
-  cy
-    .wait('@createBoard').then( board => {
-
-      expect(board.request.body.name).to.eq('nova zahrada')
-      expect(board.response.statusCode).to.eq(201)
-      expect(board.response.body.name).to.eq('nova zahrada')
-      expect(board.response.body.starred).to.be.false;
-      assert.isString(board.response.body.created)
-      assert.isNumber(board.response.body.id)
-
-    })
-
-});
+	cy.wait('@createBoard').then(board => {
+		expect(board.request.body.name).to.eq('nova zahrada')
+		expect(board.response.statusCode).to.eq(201)
+		expect(board.response.body.name).to.eq('nova zahrada')
+		expect(board.response.body.starred).to.be.false
+		assert.isString(board.response.body.created)
+		assert.isNumber(board.response.body.id)
+	})
+})

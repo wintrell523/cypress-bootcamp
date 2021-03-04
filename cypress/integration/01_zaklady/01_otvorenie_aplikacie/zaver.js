@@ -1,8 +1,5 @@
 /// <reference types="cypress" />
 
 it('otvorenie aplikácie', () => {
-
-  cy
-    .visit('localhost:3000');
-
-});
+	cy.visit('localhost:3000')
+})

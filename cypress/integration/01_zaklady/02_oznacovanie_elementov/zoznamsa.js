@@ -2,11 +2,14 @@
 
 // ⚠️ jednotlivé testy si môžeš vyfiltrovať tak, že prepíšeš "it" na "it.only"
 // úloha #1: označ štvorec pomocou classy, kruh pomocou idčka, trojuholník pomocou atribútu
-it('class, id, attr', { baseUrl: "" }, () => {
+it('class, id, attr', { baseUrl: '' }, () => {
+	cy.visit(
+		'./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/shapes.html'
+	)
 
-  cy
-    .visit('./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/shapes.html');
-
+	cy.get('.square')
+	cy.get('#circle')
+	cy.get('[data-cy=triangle]')
 })
 
 /*
@@ -15,11 +18,20 @@ it('class, id, attr', { baseUrl: "" }, () => {
   2. iba druhý a tretí kruh
   3. iba druhý kruh
 */
-it('nested classes', { baseUrl: "" }, () => {
+it('nested classes', { baseUrl: '' }, () => {
+	cy.visit(
+		'./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/squares.html'
+	)
 
-  cy
-    .visit('./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/squares.html');
+	// prvni a treti kruh (kruh uvnitr cervene barvy)
+	cy.get('.red .circle')
 
+	// druhy a treti kruh (kruh uvnitr zelene barvy)
+	cy.get('.green .circle')
+
+	// druhy kruh (cerveny)
+	//cy.get('.red.circle')
+	cy.get('.green > .circle')
 })
 
 /*
@@ -33,46 +45,36 @@ it('nested classes', { baseUrl: "" }, () => {
 
   a podobne.
 */
-it('advanced selecting', { baseUrl: "" }, () => {
+it.only('advanced selecting', { baseUrl: '' }, () => {
+	cy.visit(
+		'./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/rainbow.html'
+	)
 
-  cy
-    .visit('./cypress/integration/01_zaklady/02_oznacovanie_elementov/pages/rainbow.html');
+	// #1 označ prvý element pomocou príkazu .first()
+	cy.get('li').first()
 
-  // #1 označ prvý element pomocou príkazu .first()
-  cy
-    .get('li')
+	// #2 označ posledný element pomocou príkazu .last()
+	cy.get('li').last()
 
+	// #3 označ žltú farbu pomocou príkazu .eq()
+	cy.get('li')
+	//.eq('yellow')
 
-  // #2 označ posledný element pomocou príkazu .last()
-  cy
-    .get('li')
+	// #4 označ modrú farbu za pomoci príkazu .next()
+	cy.get('.green').next()
 
-  // #3 označ žltú farbu pomocou príkazu .eq()
-  cy
-    .get('li')
+	// #5 označ žltú farbu za pomoci príkazu .prev()
+	cy.get('.green').prev()
 
-  // #4 označ modrú farbu za pomoci príkazu .next()
-  cy
-    .get('.green')
+	// #5 označ všetky primárne farby pomocou príkazu .filter() (majú classu ".primary")
+	cy.get('li').filter('.primary')
 
-  // #5 označ žltú farbu za pomoci príkazu .prev()
-  cy
-    .get('.green')
+	// #6 označ všetky farby okrem primárnych, pomocou príkazu .not()
+	cy.get('li')
 
-  // #5 označ všetky primárne farby pomocou príkazu .filter() (majú classu ".primary")
-  cy
-    .get('li')
+	// #7 označ zelenú farbu pomocou príkazu .find
+	cy.get('.list')
 
-  // #6 označ všetky farby okrem primárnych, pomocou príkazu .not()
-  cy
-    .get('li')
-
-  // #7 označ zelenú farbu pomocou príkazu .find
-  cy
-    .get('.list')
-
-  // #8 označ celý zoznam (.list) farieb pomocou príkazu .parent()
-  cy
-    .get('.violet')
-
-});
+	// #8 označ celý zoznam (.list) farieb pomocou príkazu .parent()
+	cy.get('.violet')
+})

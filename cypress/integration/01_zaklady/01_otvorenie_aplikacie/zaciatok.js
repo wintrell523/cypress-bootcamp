@@ -1,5 +1,1 @@
-it('otvorenie aplikácie', () => {
-
-
-
-});
+it('otvorenie aplikácie', () => {})

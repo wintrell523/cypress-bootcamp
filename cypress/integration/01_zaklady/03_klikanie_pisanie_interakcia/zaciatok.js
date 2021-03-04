@@ -1,17 +1,5 @@
-it('vytvorenie nového boardu', () => {
+it('vytvorenie nového boardu', () => {})
 
+it('označenie boardu hviezdičkou', () => {})
 
-
-});
-
-it('označenie boardu hviezdičkou', () => {
-
-
-
-});
-
-it('označenie tasku', () => {
-
-
-
-});
+it('označenie tasku', () => {})

@@ -1,4 +1,5 @@
 # Domáca úloha
+
 - dokonči si cvičenia, ktoré si nedokončil/a na workshope
 - napíš test, ktorý overí niektorý css atribút (napr. modré pozadie, alebo šírku nejakého elementu v aplikácii)
 - vyskúšaj si reťazenie príkazov. skús vytvoriť reťaz s piatimi príkazmi a sleduj, ako si medzi sebou jednotlivé príkazy podávajú informácie
