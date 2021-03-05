@@ -19,5 +19,5 @@ declare global {
  */
 
 export const getByCy = (input: string): Cypress.Chainable => {
-	cy.get(`[data-cy=${input}]`)
+	return cy.get(`[data-cy=${input}]`)
 }
