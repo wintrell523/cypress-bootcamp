@@ -4,14 +4,16 @@
 // ktorý si potrebuješ označiť pred uploadnutím súboru. Bonus: skús pre novinštalovaný
 // plugin zaregistrovať typescript typy. návod ako na to nájdeš v dokumentáci
 
-// TODO co s tim tagem input type="file" ??
-// FIXME slo kliknout jednou, podruhe uz ne
+// fixture se pouziva jako argument pro custom plugin setupDb
+const db = require('../../../fixtures/uploadImageFixture.json')
+
 it('upload súboru', () => {
-	cy.visit('/board/59857112668')
+	cy.task('setupDb', db)
 
-	cy.get('[data-cy="task-title"]').eq(0).click()
+	cy.visit(`/board/${db.boards[0].id}`)
 
-	cy.get('.dropzone-custom-content').attachFile('cypressLogo.png', {
-		subjectType: 'drag-n-drop',
-	})
+	cy.get('[data-cy=task]').click()
+
+	// tag <input type="file"> je mozne vyselektovat takhle:
+	cy.get('[type=file]').attachFile('cypressLogo.png')
 })

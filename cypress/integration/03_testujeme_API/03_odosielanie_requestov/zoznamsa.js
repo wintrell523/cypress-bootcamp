@@ -6,11 +6,15 @@ beforeEach(() => {
 
 // úloha #1: vytvor si board cez api
 it('vytvorenie boardu cez api', () => {
-	cy.visit('/')
-
-	cy.request('POST', '/api/boards', {
-		name: 'api board',
+	cy.request({
+		method: 'POST',
+		url: '/api/boards',
+		body: {
+			name: 'board vytvoreny cez api',
+		},
 	})
+
+	cy.visit('/')
 })
 
 // úloha #2: vytvor si list cez api. venuj špeciálnu pozornosť tomu, ktoré atribúty requestu sú povinné
@@ -28,17 +32,17 @@ it('vytvorenie listu cez api', () => {
 
 // úloha #3: vytvor si task cez api
 it('vytvorenie tasku cez api', () => {
-	cy.visit('/board/64012942307') // pridaj si adresu svojho boardu
-
 	cy.request({
 		method: 'POST',
-		url: '/tasks',
+		url: '/api/tasks',
 		body: {
-			boardId: 64012942307, // povinný údaj
-			listId: 76110903810, // povinný údaj
-			title: 'buy milk',
+			listId: 56244626608,
+			boardId: 76547003119,
+			title: 'list vytvoreny cez api',
 		},
 	})
+
+	cy.visit('/board/76547003119') // pridaj si adresu svojho boardu
 })
 
 // úloha #4: premenuj board pomocou api

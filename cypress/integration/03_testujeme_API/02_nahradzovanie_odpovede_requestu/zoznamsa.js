@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 it('zoznam dvoch boardov z fixture', () => {
-	cy.intercept('GET', '**/api/boards', {
+	cy.intercept('GET', '/api/boards', {
 		fixture: 'exampleBoard',
 	}).as('boardList')
 
@@ -22,11 +22,17 @@ it('žiaden board v zozname', () => {
 })
 
 it('chyba pri vytvoreni tasku', () => {
-	cy.intercept('GET', '/api/boards', {
+	cy.intercept('POST', '/api/tasks', {
 		forceNetworkError: true,
-	}).as('errorBoardList')
+	}).as('createTasks')
 
-	cy.visit('/')
+	cy.visit('/board/76547003119')
+
+	cy.get('[data-cy="new-task"]').click()
+
+	cy.get('[data-cy="task-input"]').type('new task{enter}')
+
+	cy.get('#errorMessage').should('be.visible')
 
 	// pridaj si ďalší .intercept() atribút, pomocou ktorého vyvoláš chybu pri vytvorení tasku
 })

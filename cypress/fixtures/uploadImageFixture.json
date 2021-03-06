@@ -1,0 +1,32 @@
+{
+	"boards": [
+		{
+			"created": "2021-03-05",
+			"id": 88369297369,
+			"name": "new board",
+			"starred": false,
+			"user": 1
+		}
+	],
+	"lists": [
+		{
+			"boardId": 88369297369,
+			"created": "2021-03-05",
+			"id": 57928204788,
+			"title": "new list"
+		}
+	],
+	"tasks": [
+		{
+			"boardId": 88369297369,
+			"completed": false,
+			"created": "2021-03-05",
+			"deadline": "2021-03-08",
+			"description": "",
+			"id": 87664124801,
+			"listId": 57928204788,
+			"title": "new task"
+		}
+	],
+	"users": []
+}

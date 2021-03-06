@@ -57,8 +57,7 @@ it.only('advanced selecting', { baseUrl: '' }, () => {
 	cy.get('li').last()
 
 	// #3 označ žltú farbu pomocou príkazu .eq()
-	cy.get('li')
-	//.eq('yellow')
+	cy.get('li').eq(2)
 
 	// #4 označ modrú farbu za pomoci príkazu .next()
 	cy.get('.green').next()
@@ -70,11 +69,11 @@ it.only('advanced selecting', { baseUrl: '' }, () => {
 	cy.get('li').filter('.primary')
 
 	// #6 označ všetky farby okrem primárnych, pomocou príkazu .not()
-	cy.get('li')
+	cy.get('li').not('.primary')
 
 	// #7 označ zelenú farbu pomocou príkazu .find
-	cy.get('.list')
+	cy.get('.list').find('.green')
 
 	// #8 označ celý zoznam (.list) farieb pomocou príkazu .parent()
-	cy.get('.violet')
+	cy.get('.violet').parent('.list')
 })
